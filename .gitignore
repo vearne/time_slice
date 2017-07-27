@@ -1,3 +1,4 @@
 *.pyc
 dist
 time_slice.egg-info
+*.swp

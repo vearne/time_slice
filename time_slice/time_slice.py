@@ -1,34 +1,31 @@
 # encoding=utf-8
-class TimeSlice
-
-
-class TimeFrameUtils(object):
+class TimeSliceUtils(object):
     @staticmethod
     def merge(record_list):
         record_list = sorted(record_list, key=lambda x: x['start_time'])
-        return TimeFrame.aggs(record_list)
+        return TimeSliceUtils.aggs(record_list)
 
     @staticmethod
     def minus(record_list1, record_list2):
         if len(record_list2) <= 0:
             return record_list1
 
-        record_list1 = TimeFrame.merge(record_list1)
-        record_list2 = TimeFrame.merge(record_list2)
+        record_list1 = TimeSliceUtils.merge(record_list1)
+        record_list2 = TimeSliceUtils.merge(record_list2)
 
         res_list = []
         for record2 in record_list2:
             res_list = []
             for record1 in record_list1:
-                res_list.extend(TimeFrame.minus_record(record1, record2))
+                res_list.extend(TimeSliceUtils.minus_record(record1, record2))
                 record_list1 = res_list
 
-        res_list = TimeFrame.merge(res_list)
+        res_list = TimeSliceUtils.merge(res_list)
         return res_list
 
     @staticmethod
     def minus_record(record1, record2):
-        if not TimeFrame.is_overlap(record1, record2):
+        if not TimeSliceUtils.is_overlap(record1, record2):
             return [record1]
 
         res = []
@@ -91,14 +88,14 @@ class TimeFrameUtils(object):
 
         item1 = record_list[0]
         item2 = record_list[1]
-        if TimeFrame.is_overlap(item1, item2):
+        if TimeSliceUtils.is_overlap(item1, item2):
             dd = {
                 "start_time": min(item1['start_time'], item2['start_time']),
                 "end_time": max(item1['end_time'], item2['end_time'])
             }
             if len(record_list) > 2:
-                return TimeFrame.aggs([dd] + record_list[2:])
+                return TimeSliceUtils.aggs([dd] + record_list[2:])
             else:
                 return [dd]
         else:
-            return [item1] + TimeFrame.aggs(record_list[1:])
+            return [item1] + TimeSliceUtils.aggs(record_list[1:])
