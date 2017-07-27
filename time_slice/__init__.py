@@ -1,1 +1,1 @@
-from time_slice import TimeSlice, TimeSliceUtils
+from time_slice import TimeSliceUtils
