@@ -6,5 +6,5 @@ setup(
     author='vearne',
     author_email='asdwoshiaotian@gmail.com',
     packages=['time_slice',],
-    url='http://github.com/snit-ram/timeslice'
+    url='https://github.com/vearne/time_slice'
 )
