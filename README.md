@@ -54,7 +54,7 @@ def test_minus():
     
 ```
 You can use both string and datetime, beacuse we just use compare relationship between them. 
-For more examples, please read [test.py] [1] 
+For more examples, please read [test.py] 
 
-[1]: https://github.com/vearne/time_slice/blob/master/test/test.py 
+[test.py]: https://github.com/vearne/time_slice/blob/master/test/test.py 
 
